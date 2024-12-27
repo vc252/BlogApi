@@ -1,9 +1,14 @@
 import asyncHandler from "../utils/asyncHandler.js";
 import User from "../models/userModel.js";
+import customAccountExistsError from "../errors/customAccountExistsError.js";
 
 //handles user creation
 const createUser = asyncHandler(async (req,res,next)=>{
   const { fullname, password, email, about } = req.body;
+  const user = await User.findOne({email});
+  if (user) {
+    throw new customAccountExistsError('account already in use');
+  }
   const newUser = {
     fullname,
     password,
