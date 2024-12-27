@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Form</title>
+  <%- include('./partials/head') %>
+</head>
+<body style="background-color: rgb(39 39 42)">
+  <%- include('./partials/nav') %>
+
+  <div class="container mt-4">
+    <form action="/user/edit" method="post">
+      <div class="mb-3">
+        <label for="InputFullname" class="form-label text-white">Fullname</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="InputFullname" 
+          required 
+          name="fullname" 
+          value="<%= locals.user.fullname %>"
+          maxlength="50"
+          pattern="[A-Za-z]+\s[A-Za-z]+"
+          title="Fullname should include both first and last names, separated by a space"
+        >
+      </div>
+      <div class="mb-3">
+        <label for="InputEmail" class="form-label text-white">Email address</label>
+        <input 
+          type="email" 
+          class="form-control" 
+          id="InputEmail" 
+          aria-describedby="emailHelp" 
+          required 
+          value="<%= locals.user.email %>"
+          maxlength="100"
+          name="email"
+          disabled
+        >
+        <div id="emailHelp" class="form-text" style="color: rgb(200, 200, 200);">We'll never share your email with anyone else.</div>
+      </div>
+      <div class="mb-3">
+        <label for="About" class="form-label text-white">About</label>
+        <textarea class="form-control" id="About" name="about" rows="3"><%= locals.user.about %></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="InputPassword" class="form-label text-white">Password</label>
+        <input 
+          type="password" 
+          class="form-control" 
+          id="InputPassword" 
+          value="<%= locals.user.fullname %>"
+          required 
+          maxlength="50"
+          name="password" 
+          pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$"
+          title="Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, one digit, and one special character."
+        >
+      </div>
+      <button type="submit" class="btn btn-primary">Edit</button>
+    </form>
+  </div>
+
+  <%- include('./partials/script') %>
+</body>
+</html>

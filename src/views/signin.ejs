@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <%- include('./partials/head.ejs') %>
+</head>
+<body style="background-color: rgb(39 39 42)">
+  <%- include('./partials/nav.ejs') %>
+  <% if (locals.error) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= locals.error %>
+    </div>
+  <% } %>
+  <div class="container mt-4">
+    <form action="/user/signin" method="post">
+      <div class="mb-3">
+        <label for="InputEmail" class="form-label text-white">Email address</label>
+        <input 
+          type="email" 
+          placeholder="email@google.com"
+          class="form-control" 
+          id="InputEmail" 
+          aria-describedby="emailHelp" 
+          required 
+          maxlength="100"
+          name="email"
+        >
+      </div>
+      <div class="mb-3">
+        <label for="InputPassword" class="form-label text-white">Password</label>
+        <input 
+          type="password" 
+          placeholder="Hello@1234"
+          maxlength="50"
+          class="form-control" 
+          id="InputPassword" 
+          required 
+          maxLength="50"
+          name="password" 
+        >
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <%- include('./partials/script.ejs') %>
+</body>
+</html>
