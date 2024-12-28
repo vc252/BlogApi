@@ -20,6 +20,11 @@ const createUser = asyncHandler(async (req,res,next)=>{
     newUser.avatar = `/avatars/${req.file.filename}`;
     console.log(newUser.avatar);
   }
+  if (req.body.otpVerification) {
+    //then we need to redirect to the otp route
+    req.session.newUser = newUser;//store infor in the sesssion to register after otp verification
+    return res.redirect('/otp/signup')
+  }
   await User.create(newUser);
   return res.status(200).redirect('/')
 })

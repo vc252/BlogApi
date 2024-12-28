@@ -7,20 +7,38 @@
 <body style="background-color: rgb(39 39 42)">
   <%- include('./partials/nav.ejs') %>
   <div class="container mt-4" >
-    <div class="d-flex flex-wrap justify-content-around">
+    <div class="row row-cols-4">
       <% locals.blogs.forEach(blog => { %>
         <div class="col">
           <div class="card mb-4" style="width: 18rem; background-color: rgb(63 63 70);">
             <img src="<%= blog.coverImageURL %>" class="card-img-top " style="height: 150px;" alt="...">
             <div class="card-body">
               <h5 class="card-title text-white"><%= blog.title %></h5>
-              <a href="/blog/<%= blog._id %>" class="btn btn-primary">Read</a>
+              <a href="/blog/edit/<%= blog._id %>" class="text-white btn btn-success">edit</a>
+              <!-- we cannot send delete request from the form so we need to do it manually using js-->
+              <a href="#" class="text-white btn btn-danger" onclick="sendDeleteRequest(event, '/blog/delete/<%= blog._id %>')">Delete</a>
             </div>
           </div>
         </div>
       <% }) %>
     </div>
   </div>
+  <script>
+    async function sendDeleteRequest(event,url) {
+      try {
+        const response = await fetch(url,{
+          method: "DELETE"
+        })
+        if (response.ok) {
+          location.reload();
+        } else {
+          location.reload();
+        }
+      } catch (error) {
+        alert('an error occurred');
+      }
+    }
+  </script>
   <%- include('./partials/script.ejs') %>
 </body>
 </html>

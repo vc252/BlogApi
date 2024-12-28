@@ -2,6 +2,9 @@ import Blog from "../models/blogModel.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
 const editBlog = asyncHandler(async (req,res,next)=>{
+  if (!req.user) {
+    return res.redirect('/');
+  }
   //here we have the blog id that we want to edit
   const { title, body } = req.body;
   const editedBlog = {

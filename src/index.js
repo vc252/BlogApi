@@ -9,6 +9,8 @@ import cookieParser from 'cookie-parser';
 import checkForAuthenticationCookie from './middlewares/tokenAuthentication.js';
 import blogRouter from './routes/blogRouter.js';
 import Blog from './models/blogModel.js';
+import otpRouter from './routes/otpRouter.js';
+import sessionConfig from './middlewares/sessionConfig.js';
 
 connectDB();
 
@@ -31,9 +33,11 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser())
 //checks the current user through cookie and add it to the req body 
 app.use(checkForAuthenticationCookie);
+app.use(sessionConfig)
 
 app.use('/user',userRouter);
 app.use('/blog',blogRouter);
+app.use('/otp',otpRouter);
 
 app.get('/',async (req,res,next)=>{
   const allBlogs = await Blog.find().sort({updatedAt: 'desc'});
@@ -41,6 +45,10 @@ app.get('/',async (req,res,next)=>{
     user: req.user,
     blogs: allBlogs
   });
+})
+
+app.get('*',(req,res,next)=>{
+  res.redirect('/');
 })
 
 //the default errorHandler

@@ -8,12 +8,16 @@
 </head>
 <body style="background-color: rgb(39 39 42)">
   <%- include('./partials/nav') %>
-
+  <% if (locals.error) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= locals.error %>
+    </div>
+  <% } %>
   <div class="container mt-4">
     <form action="/user/signup" method="post" enctype="multipart/form-data">
       <div class="mb-3">
         <label for="avatarImage" class="form-label text-white">Avatar</label>
-        <input type="file" class="form-control" required id="avatarImage" name="avatar">
+        <input type="file" class="form-control" id="avatarImage" name="avatar">
       </div>
       <div class="mb-3">
         <label for="InputFullname" class="form-label text-white">Fullname</label>
@@ -60,6 +64,10 @@
           pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$"
           title="Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, one digit, and one special character."
         >
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" name="otpVerification" id="InputCheck">
+        <label class="form-check-label text-white" for="InputCheck">Verify Using Otp</label>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

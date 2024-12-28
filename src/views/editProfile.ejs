@@ -10,7 +10,12 @@
   <%- include('./partials/nav') %>
 
   <div class="container mt-4">
-    <form action="/user/edit" method="post">
+    <form action="/user/edit" method="post" enctype="multipart/form-data">
+      <img src="<%= locals.user.avatar %>" width="200px">
+      <div class="mb-3">
+        <label for="avatarImage" class="form-label text-white">Avatar</label>
+        <input type="file" class="form-control" id="avatarImage" name="avatar">
+      </div>
       <div class="mb-3">
         <label for="InputFullname" class="form-label text-white">Fullname</label>
         <input 
@@ -27,6 +32,7 @@
       </div>
       <div class="mb-3">
         <label for="InputEmail" class="form-label text-white">Email address</label>
+        <!-- disabled would have made it not be send in the form data-->
         <input 
           type="email" 
           class="form-control" 
@@ -36,24 +42,33 @@
           value="<%= locals.user.email %>"
           maxlength="100"
           name="email"
-          disabled
+          readonly
         >
-        <div id="emailHelp" class="form-text" style="color: rgb(200, 200, 200);">We'll never share your email with anyone else.</div>
       </div>
       <div class="mb-3">
         <label for="About" class="form-label text-white">About</label>
         <textarea class="form-control" id="About" name="about" rows="3"><%= locals.user.about %></textarea>
       </div>
       <div class="mb-3">
-        <label for="InputPassword" class="form-label text-white">Password</label>
+        <label for="OldPassword" class="form-label text-white">Old Password</label>
         <input 
           type="password" 
           class="form-control" 
-          id="InputPassword" 
-          value="<%= locals.user.fullname %>"
-          required 
+          id="OldPassword" 
+          placeholder="required for the update to take place"
           maxlength="50"
-          name="password" 
+          name="oldPassword" 
+        >
+      </div>
+      <div class="mb-3">
+        <label for="NewPassword" class="form-label text-white">New Password</label>
+        <input 
+          type="password" 
+          class="form-control" 
+          id="NewPassword" 
+          placeholder="not required if no change needed"
+          maxlength="50"
+          name="newPassword" 
           pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$"
           title="Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, one digit, and one special character."
         >

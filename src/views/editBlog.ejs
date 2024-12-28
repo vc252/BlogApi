@@ -7,20 +7,23 @@
 <body style="background-color: rgb(39 39 42)">
   <%- include('./partials/nav.ejs') %>
   <div class="container mt-3">
-    <form method="post" action="/blog/add" enctype="multipart/form-data">
+    <form method="post" action="/blog/edit/<%= locals.blog._id %>" enctype="multipart/form-data">
+      <div class="mb-3">
+        <img src="<%= locals.blog.coverImageURL %>" width="200px">
+      </div>
       <div class="mb-3">
         <label for="coverImage" class="form-label text-white">Cover Image</label>
-        <input type="file" class="form-control" required id="coverImage" name="coverImage">
+        <input type="file" class="form-control" id="coverImage" name="coverImage">
       </div>
       <div class="mb-3">
         <label for="inputTitle" class="form-label text-white">Title</label>
-        <input type="text" class="form-control" required id="InputTitle" maxlength="50" name="title">
+        <input type="text" class="form-control" value="<%= locals.blog.title %>" id="InputTitle" maxlength="50" name="title">
       </div>
       <div class="mb-3">
         <label for="InputContent" class="form-label text-white">Content</label>
-        <textarea class="form-control" id="InputContent" reaquired name="body" rows="3"></textarea>
+        <textarea class="form-control" id="InputContent" name="body" rows="3"><%= locals.blog.body %></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Edit</button>
     </form>
   </div>
   <%- include('./partials/script.ejs') %>

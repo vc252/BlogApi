@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head.ejs') %>
+  <title>Document</title>
+</head>
+<body style="background-color: rgb(39 39 42)">
+  <%- include('./partials/nav.ejs') %>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title text-center mb-4">OTP Verification</h4>
+            <form action="/otp/signup" method="POST" id="otpForm">
+              <div class="mb-3">
+                <label for="otp" class="form-label">Enter OTP</label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="otp" 
+                  name="otp" 
+                  placeholder="Enter your OTP" 
+                  required>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Verify OTP</button>
+                <a href="/otp/signup" class="btn btn-warning">Resend OTP</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('./partials/script.ejs') %>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head.ejs') %>
+  <title>Document</title>
+</head>
+<body style="background-color: rgb(39 39 42)">
+  <%- include('./partials/nav.ejs') %>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center">
+        <!-- User Avatar -->
+        <img 
+          src="<%= locals.avatar %>" 
+          alt="User Avatar" 
+          class="img-fluid rounded-circle mb-3" 
+          style="width: 150px; height: 150px; object-fit: cover;"
+        >
+  
+        <!-- User About Content -->
+        <pre class="mb-3 text-white" style="white-space: pre-wrap; word-wrap: break-word;">
+          <%= locals.about %>
+        </pre>
+      </div>
+    </div>
+  </div>
+  
+  <%- include('./partials/script.ejs') %>
+</body>
+</html>

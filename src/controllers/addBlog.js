@@ -2,6 +2,9 @@ import asyncHandler from "../utils/asyncHandler.js";
 import Blog from "../models/blogModel.js";
 
 const addBlog = asyncHandler(async (req,res,next)=>{
+  if (!req.user) {
+    return res.redirect('/');
+  }
   const {title, body} = req.body;
   //there was some error coming this is to ensure we don't add the blog
   //if there is no user logged in
