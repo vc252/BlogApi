@@ -6,6 +6,11 @@
 </head>
 <body style="background-color: rgb(39 39 42)">
   <%- include('./partials/nav.ejs') %>
+  <% if (locals.error) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= locals.error %>
+    </div>
+  <% } %>
   <div class="container mt-3">
     <form method="post" action="/blog/add" enctype="multipart/form-data">
       <div class="mb-3">

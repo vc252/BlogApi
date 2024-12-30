@@ -1,4 +1,5 @@
 import multer from "multer";
+import customImageFileError from "../errors/customImageFileError.js";
 
 const coverStorage = multer.diskStorage({
   destination: function(req,file,cb) {
@@ -26,7 +27,7 @@ const coverUpload = multer({
   //check if it is an image file
   fileFilter(req,file,cb) {
     if(!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return cb( new Error('Please upload a valid image file'))
+      return cb( new customImageFileError('upload image files'));
     }
     cb(undefined,true);
   }
@@ -40,7 +41,7 @@ const avatarUpload = multer({
   //check if it is an image file
   fileFilter(req,file,cb) {
     if(!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return cb( new Error('Please upload a valid image file'))
+      return cb( new customImageFileError('upload image files'));
     }
     cb(undefined,true);
   }
